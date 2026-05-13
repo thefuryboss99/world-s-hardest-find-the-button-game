@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>find the button !</title>
+</head>
+<body>
+    <p style="font-family: arial; font-size: 50px;position: absolute; top: -50px; left: 575px;">LEVEL 3</p>
+   <input type="text" placeholder="type a word (literally typing a word doesn't work)" style="position: absolute; top: 75px; left: 450px; font-size: 20px; width: 425px;">
+   <p class="hint" style="display: none;font-family: arial;">what was typed on the button again? (no higher case)</p>
+<a href ="level 4.html">
+   <button class="Button" style="display: none;">you found it !</button>
+</a>
+<script>
+    let displayhint = () => {
+        const hint = document.querySelector('.hint');
+        hint.style.display = 'block';
+    };
+    let displayButton = () => {
+        const button = document.querySelector('.Button');
+        button.style.display = 'block';
+    };
+    const input = document.querySelector('input');
+    input.addEventListener('input', () => {
+        const value = input.value.toLowerCase();
+        if (value === 'a word' || value === 'type a word (literally typing a word doesn\'t work)'){
+            window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+        }
+        else if (value === 'catch me noob >:)' ){
+            displayButton();
+        }
+        else if (value === 'hint' ){
+            displayhint();
+        }
+    });
+    </script>
+</body>
+</html>
