@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+    body {
+        background-color: #ffffff;
+    }
+        /* Animation keyframes */
+    @keyframes movedabutton {
+        0%   { transform: translateX(0); }
+        10%  { transform: translateX(200px); }
+        20%  { transform: translateY(-200px); }
+        30%  { transform: translateX(-200px); }
+        40% { transform: translateY(200px); }
+        50% { transform: translateX(600px); }
+        60% { transform: translateY(-20px); }
+        70% { transform: translateX(-600px); }
+        80% { transform: translateY(-175px); }
+        90% { transform: translateX(400px); }
+        100% { transform: translateY(175px); }
+    }
+    .movingbutton {
+        animation: movedabutton 6s infinite alternate ease-in-out;
+    }
+
+    </style>
+    <title>find the button !</title>
+</head>
+<body>
+    <a href="level 3.html">
+    <p style="font-family: arial; font-size: 50px;position: absolute; top: -50px; left: 575px;color: black;">LEVEL 2</p>
+    </a>
+    <p style="font-family: arial; font-size: 50px;position: absolute; top: 75px; left: 75px;">NOT EVERY THING YOU SEE IS WHAT IT SEEMS...</p>
+    <button class="movingbutton" style="background-color: white;color: rgb(0, 0, 0);border-color: white;position: absolute; top: 436px; left: 243px;">catch me noob >:)</button>
+    <p style="font-family: arial; font-size: 20px;position: absolute; top: 500px; left: 75px;color: rgb(255, 255, 255);">it's the button's first position maybe who knows ? :)</p>
+</body>
+</html>
