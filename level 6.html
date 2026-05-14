@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>find the button!</title>
+    <style>
+    #movingButton {
+        position: relative; /* Needed for movement */
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: transform 0.5s ease; /* Smooth movement */
+    }
+    </style>
+</head>
+<body>
+    <p style="font-family: arial; font-size: 50px;position: absolute; top: -50px; left: 575px;">LEVEL 6</p>
+    <p style="font-family: arial; font-size: 50px;position: absolute; top: 50px; left: 212.5px;">CLICK THE BUTTON 100 TIMES TO PASS</p>
+<button id="movingButton" style="position: absolute; bottom: 0; left: 0;" onclick="incrementCounter()">Click Me</button>
+<p>clicks: <span id="clickCount">0</span></p>
+<script>
+    let counter = 0;
+    function incrementCounter() {
+        counter++;
+        document.getElementById('clickCount').textContent = counter;
+        if (counter >= 100) {
+            window.location.href = 'level 7.html';
+        }
+        let button = document.getElementById('movingButton');
+        let x = Math.random() * (window.innerWidth - button.offsetWidth);
+        let y = Math.random() * (window.innerHeight - button.offsetHeight);
+        button.style.transform = `translate(${x}px, ${y}px)`;
+    }
+</script>
+</body>
+</html>
