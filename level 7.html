@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>find the button!</title>
+</head>
+<body>
+        <p style="font-family: arial; font-size: 50px;position: absolute; top: -50px; left: 575px;">LEVEL 7</p>
+<p style="font-family: arial; font-size: 50px;position: absolute; top: 50px; left: 250px;">levels can be tricky or worse like this one</p>
+<p style="font-family: arial; font-size: 50px;position: absolute; top: 100px; left: 120px;">type the first 10 digits of pi and tell me what you see</p>
+<input type="text" placeholder="we love cherry pi (e)" style="position: absolute; top: 225px; left: 400px; font-size: 20px; width: 560px;">
+<p class="hint" style="display: none;">how about the first 50 digits?</p>
+<a href="level 8.html">
+    <button class="Button" style="display: none;">you found it !</button>
+</a>
+<script>
+    let displayhint = () => {
+        const hint = document.querySelector('.hint');
+        hint.style.display = 'block';
+    };
+    let displayButton = () => {
+        const button = document.querySelector('.Button');
+        button.style.display = 'block';
+    };
+    const input = document.querySelector('input');
+    input.addEventListener('input', () => {
+        const value = input.value;
+        if (value === '3.1415926535') {
+            window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+        }
+        else if (value === '3.1415926535897932384626433832795028841971693993751') {
+            displayButton();
+        }
+        else if (value === 'rickroll' || value === 'rick roll' || value === 'rick-roll' || value === 'rick astley' || value === 'Rick Astley' || value === 'Rickroll' || value === 'Rick Roll' || value === 'Rick-roll' || value === 'Rick-Roll') {
+            displayhint();
+        }
+    });
+</script>
