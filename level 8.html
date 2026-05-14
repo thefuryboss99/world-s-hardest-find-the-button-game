@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>find the button!</title>
+</head>
+<body>
+    <p style="font-family: arial; font-size: 50px;position: absolute; top: -50px; left: 575px;">LEVEL 8</p>
+    <p style="font-family: arial; font-size: 50px;position: absolute; top: 50px; left: 150px;">WOW 2/10 OF THE WAY- is that geometry dash ?</p>
+    <canvas id="Player" ></canvas>
+<canvas id="spike" style="position: absolute; top: 305.5px; left: 100px;"></canvas>
+<canvas id="spike1" style="position: absolute; top: 200.5px; left: 100px;"></canvas>
+<canvas id="spike2" style="position: absolute; top: 305.5px; left: 600px;"></canvas>
+<canvas id="spike3" style="position: absolute; top: 200.5px; left: 600px;"></canvas>
+<canvas id="spike4" style="position: absolute; top: 305.5px; left: 1100px;"></canvas>
+<canvas id="spike5" style="position: absolute; top: 200.5px; left: 1100px;"></canvas>
+<a href="level 9.html">
+<button class="Button" style="display: none; position: absolute; top: 0px;"> you did it!</button>
+</a>
+    <script>
+        let displaybutton = () => {
+            const button = document.querySelector('.Button');
+            button.style.display = 'block';
+        };
+(function() {
+    const player = document.getElementById('Player');
+    let ctx = player.getContext('2d');
+
+        // set the canvas size to fill the window
+    player.width = window.innerWidth;
+    player.height = window.innerHeight;
+
+        // Rectangle properties
+    let rectX = 0;
+    let rectY = player.height / 2 - 25;
+    const rectWidth = 25;
+    const rectHeight = 25;
+    const speed = 2; // pixels per frame
+
+        function animate() {
+            ctx.clearRect(0, 0, player.width, player.height);
+            ctx.fillStyle = 'red';
+            ctx.fillRect(rectX, rectY, rectWidth, rectHeight);
+            // makes it move
+            rectX += speed;
+            if (rectX > player.width) {
+                rectX = -rectWidth;
+            }
+
+            requestAnimationFrame(animate);
+        }
+        // start the animation
+        animate();
+        window.addEventListener('keydown', (event) => {
+            if (event.key === " ") {
+                rectY -= 50; 
+                setTimeout(() => {
+                    rectY += 50;
+                }, 400);
+            }
+        });
+        setInterval(() => {
+            if (rectX + rectWidth >= player.width) {
+                displaybutton();
+            }
+        }, 100)
+        let spike = document.getElementById('spike');
+    const spikectx = spike.getContext('2d');
+
+    if (!spikectx) {
+        console.error("Your browser does not support HTML5 Canvas.");
+    } else {
+        // Triangle coordinates
+        const x1 = 10, y1 = 20; // First point
+        const x2 = 20, y2 = 5;  // Second point
+        const x3 = 30, y3 = 20; // Third point
+
+        // Begin a new path for the triangle
+        spikectx.beginPath();
+        spikectx.moveTo(x1, y1); // Move to first point
+        spikectx.lineTo(x2, y2); // Draw line to second point
+        spikectx.lineTo(x3, y3); // Draw line to third point
+        spikectx.closePath();    // Close the path back to first point
+
+        // Fill the triangle
+        spikectx.fillStyle = "#000000"; // Black fill
+        spikectx.fill();
+    };
+
+    setInterval(() => {
+        if (rectX + rectWidth >= 100 && rectX <= 130 && rectY + rectHeight >= 305.5 && rectY <= 325.5) {
+            window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+        }
+    }, 100);
+
+            let spike1 = document.getElementById('spike1');
+    const spikectx1 = spike1.getContext('2d');
+
+    if (!spikectx1) {
+        console.error("Your browser does not support HTML5 Canvas.");
+    } else {
+        // Triangle coordinates
+        const x1 = 10, y1 = 20; // First point
+        const x2 = 20, y2 = 5;  // Second point
+        const x3 = 30, y3 = 20; // Third point
+
+        // Begin a new path for the triangle
+        spikectx1.beginPath();
+        spikectx1.moveTo(x1, y1); // Move to first point
+        spikectx1.lineTo(x2, y2); // Draw line to second point
+        spikectx1.lineTo(x3, y3); // Draw line to third point
+        spikectx1.closePath();    // Close the path back to first point
+
+        // Fill the triangle
+        spikectx1.fillStyle = "#000000"; // Black fill
+        spikectx1.fill();
+    };
+
+    setInterval(() => {
+        if (rectX + rectWidth >= 100 && rectX <= 130 && rectY + rectHeight >= 200.5 && rectY <= 220.5) {
+            window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+        }
+    }, 100);
+
+            let spike2 = document.getElementById('spike2');
+    const spikectx2 = spike2.getContext('2d');
+
+    if (!spikectx2) {
+        console.error("Your browser does not support HTML5 Canvas.");
+    } else {
+        // Triangle coordinates
+        const x1 = 10, y1 = 20; // First point
+        const x2 = 20, y2 = 5;  // Second point
+        const x3 = 30, y3 = 20; // Third point
+
+        // Begin a new path for the triangle
+        spikectx2.beginPath();
+        spikectx2.moveTo(x1, y1); // Move to first point
+        spikectx2.lineTo(x2, y2); // Draw line to second point
+        spikectx2.lineTo(x3, y3); // Draw line to third point
+        spikectx2.closePath();    // Close the path back to first point
+
+        // Fill the triangle
+        spikectx2.fillStyle = "#000000"; // Black fill
+        spikectx2.fill();
+    };
+
+    setInterval(() => {
+        if (rectX + rectWidth >= 600 && rectX <= 630 && rectY + rectHeight >= 305.5 && rectY <= 325.5) {
+            window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+        }
+    }, 100);
+
+            let spike3 = document.getElementById('spike3');
+    const spikectx3 = spike3.getContext('2d');
+
+    if (!spikectx3) {
+        console.error("Your browser does not support HTML5 Canvas.");
+    } else {
+        // Triangle coordinates
+        const x1 = 10, y1 = 20; // First point
+        const x2 = 20, y2 = 5;  // Second point
+        const x3 = 30, y3 = 20; // Third point
+
+        // Begin a new path for the triangle
+        spikectx3.beginPath();
+        spikectx3.moveTo(x1, y1); // Move to first point
+        spikectx3.lineTo(x2, y2); // Draw line to second point
+        spikectx3.lineTo(x3, y3); // Draw line to third point
+        spikectx3.closePath();    // Close the path back to first point
+
+        // Fill the triangle
+        spikectx3.fillStyle = "#000000"; // Black fill
+        spikectx3.fill();
+    };
+
+    setInterval(() => {
+        if (rectX + rectWidth >= 600 && rectX <= 630 && rectY + rectHeight >= 200.5 && rectY <= 220.5) {
+            window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+        }
+    }, 100);
+                let spike4 = document.getElementById('spike4');
+    const spikectx4 = spike4.getContext('2d');
+
+    if (!spikectx4) {
+        console.error("Your browser does not support HTML5 Canvas.");
+    } else {
+        // Triangle coordinates
+        const x1 = 10, y1 = 20; // First point
+        const x2 = 20, y2 = 5;  // Second point
+        const x3 = 30, y3 = 20; // Third point
+
+        // Begin a new path for the triangle
+        spikectx4.beginPath();
+        spikectx4.moveTo(x1, y1); // Move to first point
+        spikectx4.lineTo(x2, y2); // Draw line to second point
+        spikectx4.lineTo(x3, y3); // Draw line to third point
+        spikectx4.closePath();    // Close the path back to first point
+
+        // Fill the triangle
+        spikectx4.fillStyle = "#000000"; // Black fill
+        spikectx4.fill();
+    };
+
+    setInterval(() => {
+        if (rectX + rectWidth >= 1100 && rectX <= 1130 && rectY + rectHeight >= 305.5 && rectY <= 325.5) {
+            window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+        }
+    }, 100);
+
+            let spike5 = document.getElementById('spike5');
+    const spikectx5 = spike5.getContext('2d');
+
+    if (!spikectx5) {
+        console.error("Your browser does not support HTML5 Canvas.");
+    } else {
+        // Triangle coordinates
+        const x1 = 10, y1 = 20; // First point
+        const x2 = 20, y2 = 5;  // Second point
+        const x3 = 30, y3 = 20; // Third point
+
+        // Begin a new path for the triangle
+        spikectx5.beginPath();
+        spikectx5.moveTo(x1, y1); // Move to first point
+        spikectx5.lineTo(x2, y2); // Draw line to second point
+        spikectx5.lineTo(x3, y3); // Draw line to third point
+        spikectx5.closePath();    // Close the path back to first point
+
+        // Fill the triangle
+        spikectx5.fillStyle = "#000000"; // Black fill
+        spikectx5.fill();
+    };
+
+    setInterval(() => {
+        if (rectX + rectWidth >= 1100 && rectX <= 1130 && rectY + rectHeight >= 200.5 && rectY <= 220.5) {
+            window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+        }
+    }, 100);
+})();
+
+    </script>
+    </body>
+    </html>
