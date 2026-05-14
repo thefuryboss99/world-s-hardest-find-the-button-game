@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>find the button !</title>
+</head>
+<body>
+    <p style="font-family: arial; font-size: 50px;position: absolute; top: -50px; left: 575px;">LEVEL 5</p>
+   <input type="text" placeholder="remember how many buttons there were since the beginning?" style="position: absolute; top: 75px; left: 400px; font-size: 20px; width: 550px;">
+   <p class="hint" style="display: none;font-family: arial;">yeah not today go on your own</p>
+<a href ="level 6.html">
+   <button class="Button" style="display: none;">you found it !</button>
+</a>
+<input type="color" style="opacity: 0;">
+<script>
+    let displayhint = () => {
+        const hint = document.querySelector('.hint');
+        hint.style.display = 'block';
+    };
+    let displayButton = () => {
+        const button = document.querySelector('.Button');
+        button.style.display = 'block';
+    };
+    const input = document.querySelector('input');
+    input.addEventListener('input', () => {
+        const value = input.value.toLowerCase();
+        if (value === '67'){
+            window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+        }
+        else if (value === '85' ){
+            displayButton();
+        }
+        else if (value === 'hint' ){
+            displayhint();
+        }
+    });
+    </script>
+</body>
+</html>
