@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>find the button!</title>
+</head>
+<body>
+    <p style="font-family: arial; font-size: 50px;position: absolute; top: -50px; left: 575px;">LEVEL 10</p>
+    <p style="font-family: arial; font-size: 50px;position: absolute; top: 50px; left: 300px;">WOW 1/4 OF THE WAY THERE!</p>
+    <p style="font-family: arial; font-size: 50px;position: absolute; top: 125px; left: 100px;">spell supercalifragilisticexpialidocious in 10 seconds</p>
+    <input type="text" id="input" placeholder="SUPERCALIFRAGILISTICEXPIALIDOCIOUS" style="position: absolute; top: 300px; left: 475px; width: 405.25px; height: 25px; font-size: 20px;">
+    <a href="level 11.html">
+        <button style="display: none;">better be quick before-</button>
+    </a>
+    <p id="timer">Time left: 10 seconds</p>
+    <script>
+        let refresh = () => {
+            location.reload();
+        };
+        let timeLeft = 10;
+        const timer = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                refresh();
+            } else {
+                timeLeft--;
+                document.getElementById('timer').textContent = `Time left: ${timeLeft} seconds`;
+            }
+        }, 1000);
+        const input = document.getElementById('input');
+        const button = document.querySelector('a button');
+        input.addEventListener('input', () => {
+            if (input.value.toLowerCase() === 'supercalifragilisticexpialidocious') {
+                button.style.display = 'block';
+            } else {
+                button.style.display = 'none';
+            }
+        });
+        </script>
+</body>
+</html>
