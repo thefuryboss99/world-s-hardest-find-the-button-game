@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>find the button!</title>
+</head>
+<body>
+        <p style="font-family: arial; font-size: 50px;position: absolute; top: -50px; left: 575px;">LEVEL 11</p>
+    <p style="font-family: arial; font-size: 50px;position: absolute; top: 50px; left: 350px;">DON'T CLICK THE BUTTON</p>
+    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+        <button style="position: absolute; top: 300px; left: 630px;">CLICK ME!</button>
+    </a>
+    <a href="level 12.html">
+    <p class="scam" style="display: none; font-family: arial; position: absolute; top: 0px; left: 0px; color:black;">THE BUTTON CHANGED BACK TO NORMAL YOU HAVE 5s</p>
+    </a>
+<script>
+function displaylie() {
+    document.querySelector('.scam').style.display = 'block';
+}
+
+function refresh() {
+    location.reload();
+}
+
+let timeLeft = 60;
+
+const timer = setInterval(() => {
+    timeLeft--;
+
+    if (timeLeft === 5) {
+        displaylie();
+    }
+
+    if (timeLeft <= 0) {
+        clearInterval(timer);
+        refresh();
+    }
+}, 1000);
+
+</script>
+</body>
+</html>
