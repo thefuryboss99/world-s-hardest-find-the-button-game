@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>find the button!</title>
+    <style>
+        @keyframes shakingmines {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(14px, 0); }
+            50% { transform: translate(0, 14px); }
+            75% { transform: translate(-14px, 0); }
+            100% { transform: translate(0, -14px); }
+        }
+            #landmine, #landmine1, #landmine2, #landmine3, #landmine4, #landmine5, #landmine6, #landmine7, #landmine8, #landmine9, #landmine10, #landmine11, #landmine12, #landmine13, #landmine14, #landmine15, #landmine16 {
+                background-color: rgb(0, 255, 0);
+                transition: background-color 0.5s ease;
+                animation: shakingmines 0.5s infinite;
+            }
+                    #landmine:hover, #landmine1:hover, #landmine2:hover, #landmine3:hover, #landmine4:hover, #landmine5:hover, #landmine6:hover, #landmine7:hover, #landmine8:hover, #landmine9:hover, #landmine10:hover, #landmine11:hover, #landmine12:hover, #landmine13:hover, #landmine14:hover, #landmine15:hover, #landmine16:hover {
+                background-color: red;
+            }
+
+    </style>
+</head>
+<body>
+        <p style="font-family: arial; font-size: 50px;position: absolute; top: -50px; left: 575px;">LEVEL 9</p>
+    <p style="font-family: arial; font-size: 50px;position: absolute; top: 50px; left: 250px;">HOVER ALL OF THE LANDMINES!</p>
+<canvas id="landmine" style="position: absolute; top: 225px; left: 500px; width: 25px; height: 25px;"></canvas>
+<canvas id="landmine1" style="position: absolute; top: 255px; left: 545px; width: 25px; height: 25px;"></canvas>
+<canvas id="landmine2" style="position: absolute; top: 230px; left: 585px; width: 25px; height: 25px;"></canvas>
+<canvas id="landmine3" style="position: absolute; top: 2250px; left: 665px;  width: 25px; height: 25px;"></canvas>
+<canvas id="landmine4" style="position: absolute; top: 300px; left: 500px;  width: 25px; height: 25px;"></canvas>
+<canvas id="landmine5" style="position: absolute; top: 275px; left: 690px;  width: 25px; height: 25px;"></canvas>
+<canvas id="landmine6" style="position: absolute; top: 400px; left: 575px; width: 25px; height: 25px;"></canvas>
+<canvas id="landmine7" style="position: absolute; top: 355px; left: 545px; width: 25px; height: 25px;"></canvas>
+<canvas id="landmine8" style="position: absolute; top: 265px; left: 640px; width: 25px; height: 25px;"></canvas>
+<canvas id="landmine9" style="position: absolute; top: 350px; left: 665px; width: 25px; height: 25px;"></canvas>
+<canvas id="landmine10" style="position: absolute; top: 300px; left: 550px;  width: 25px; height: 25px;"></canvas>
+<canvas id="landmine11" style="position: absolute; top: 350px; left: 600px;  width: 25px; height: 25px;"></canvas>
+<canvas id="landmine12" style="position: absolute; top: 325px; left: 700px;  width: 25px; height: 25px;"></canvas>
+<canvas id="landmine13" style="position: absolute; top: 395px; left: 635px;  width: 25px; height: 25px;"></canvas>
+<canvas id="landmine14" style="position: absolute; top: 275px; left: 595px; width: 25px; height: 25px;"></canvas>
+<canvas id="landmine15" style="position: absolute; top: 225px; left: 665px; width: 25px; height: 25px;"></canvas>
+<canvas id="landmine16" style="position: absolute; top: 400px; left: 695px; width: 25px; height: 25px;"></canvas>
+<a href="level 10.html">
+    <button style="position: absolute; bottom: 300px; left: 600px;">Next Level</button>
+</a>
+<script>
+    const landmines = document.querySelectorAll('#landmine, #landmine1, #landmine2, #landmine3, #landmine4, #landmine5, #landmine6, #landmine7, #landmine8, #landmine9, #landmine10, #landmine11, #landmine12, #landmine13, #landmine14, #landmine15, #landmine16');
+    landmines.forEach(landmine => {
+        landmine.addEventListener('mouseover', () => {
+            alert('You really hit a landmine ? the objective is to avoid a landimine but you are hovering over it, what are you even thinking ? its like  you were told to jump of a building of course you would not DUH');
+        });
+    });
+</script>
+</body>
+</html>
