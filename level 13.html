@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>find the button!</title>
+</head>
+<body>
+    <p style="font-family: arial; font-size: 50px;position: absolute; top: -50px; left: 575px;">LEVEL 13</p>
+    <p style="font-family: arial; font-size: 50px;position: absolute; top: 50px; left: 250px;">I HOPE YOU KNOW A BIT OF PYTHON</p>
+    <textarea placeholder="type the code for a button, format it,let the space between each line of code be one line and name the button |button| and don't forget, no high case." style="position: absolute; top: 150px; left: 450px; font-size: 20px; width: 425px; height: 425px;"></textarea>
+    <a href="level 14.html">
+        <button class="Button" style="display: none;position: absolute; top: 0px; left: 0px;">you made it!</button>
+    </a>
+    <script>
+        let displayButton = () => {
+            const button = document.querySelector('.Button');
+            button.style.display = 'block';
+        };
+        const codebox = document.querySelector('textarea');
+        codebox.addEventListener('input', () => {
+            const value = codebox.value.toLowerCase();
+            if (value === 'from tkinter import*\n\nwindow = tk\n\nbutton = button()\n\nwindow.mainloop()'){
+                displayButton();
+            }
+        });
+
+    </script>
+</body>
+</html>
