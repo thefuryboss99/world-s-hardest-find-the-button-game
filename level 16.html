@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>find the button!</title>
+        <style>
+            body {
+        background-image: url('windows_7_2.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        margin: 0;
+            }
+            a:link,
+    a:visited,
+    a:hover,
+    a:active {
+        color: #0000ff;}
+
+        .item:hover {
+    background-color: rgba(205, 224, 255, 0.4)
+}
+
+.otheritem.active, .otheritem:hover {
+    -webkit-filter: brightness(1.3) contrast(1.3);
+    filter: brightness(1.3) contrast(1.3)
+}
+
+        #start-button, #glowing-icon {
+    transition: opacity 0.3s ease-in-out;
+}
+        </style>    
+</head>
+<body>
+    <canvas id="taskbarCanvas" style="position: absolute;bottom:0px; left: -1px;"></canvas>
+    <p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 50px;position: absolute; top: -50px; left: 575px;">LEVEL 16</p>
+    <p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 10px;position: absolute; top: 50px; left: 5px; color: white;  text-shadow: 2px 2px 5px black;">recycle bin</p>
+    <p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 10px;position: absolute; top: 50px; left: 5px; color: white; text-shadow:-1px -1px 0 black, 1px -1px 0 black,-1px  1px 0 black,1px  1px 0 black; ">recycle bin</p>
+    <img id="glowing-icon" class="start-buttonanim" src="d20uqi0-59df1a13-81c0-43a1-8b8e-854b464e5067.png" alt="glowing icon" style="opacity: 0; position: absolute; bottom: 5px; left: 5px; ">
+    <img id="start-button" class="start-buttonanim" src="start-button.webp" alt="Start Button" style="position: absolute; bottom: 7.25px; left: 7.25px; height: 35px; width: 35px;">
+    <img class="otheritem" src="ie.webp" alt="Internet Explorer" style="position: absolute; bottom: 3.5px; left: 65px; height: 40px; width: 40px;">
+    <img class="otheritem" src="Windowswindows7_explorer.png" alt="Windows Explorer" style="position: absolute; bottom: 5px; left: 130px; height: 35px; width: 35px;">
+    <img class="otheritem" src="windows-media-player-12-logo-405897.webp" alt="Windows Media Player" style="position: absolute; bottom: 5px; left: 195px; height: 35px; width: 35px;">
+    <img class="item" src="recycle-bin.ico" alt="Recycle Bin" style="position: absolute; top: 5px; left: 5px; height: 50px; width: 50px;">
+    <img src="icons8-battery-50.png" alt="Battery Icon" style="position: absolute; bottom: 15px; right: 95px; height: 20px; width: 20px;">
+    <img src="icons8-volume-élevé-64.png" alt="Volume Icon" style="position: absolute; bottom: 15px; right: 65px; height: 20px; width: 20px;">
+    <img src="icons8-signal-50.png" alt="Signal Icon" style="position: absolute; bottom: 15px; right: 125px; height: 20px; width: 20px;">
+
+    
+    <script>
+        const canvas = document.getElementById('taskbarCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Set canvas to window size
+        canvas.width = 1358;
+        canvas.height = 300;
+        
+        // Taskbar dimensions
+        const taskbarHeight = 50;
+        const taskbarY = canvas.height - taskbarHeight;
+        
+        function drawTaskbar() {
+            
+            // Draw taskbar background with gradient
+            const gradient = ctx.createLinearGradient(0, taskbarY, 0, canvas.height);
+            gradient.addColorStop(0, '#30445E');
+            gradient.addColorStop(0.5, '#00FFFF');
+            gradient.addColorStop(1, '#30445E');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, taskbarY, canvas.width, taskbarHeight);
+            
+            // Draw top border of taskbar
+            ctx.strokeStyle = '#2b7fd3';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(0, taskbarY);
+            ctx.lineTo(canvas.width, taskbarY);
+            ctx.stroke();
+            
+            
+            // Draw system tray
+            drawSystemTray();
+            
+            // Draw clock
+            drawClock();
+            
+            // Draw date
+            drawDate();
+        }
+        
+        function drawStartButton() {
+            const startX = 5;
+            const startY = taskbarY + 5;
+            const startWidth = 60;
+            const startHeight = 40;
+            
+            // Start button background
+            const btnGradient = ctx.createLinearGradient(startX, startY, startX, startY + startHeight);
+            btnGradient.addColorStop(0, '#52b4e6');
+            btnGradient.addColorStop(1, '#0084d1');
+            ctx.fillStyle = btnGradient;
+            ctx.fillRect(startX, startY, startWidth, startHeight);
+            
+            // Start button border
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(startX, startY, startWidth, startHeight);
+            
+            // Start button text
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 14px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('Start', startX + startWidth / 2, startY + startHeight / 2);
+        }
+        
+        function drawTaskbarItems() {
+            const itemStartX = 75;
+            const itemY = taskbarY + 5;
+            const itemHeight = 40;
+            const itemSpacing = 5;
+            let currentX = itemStartX;
+        }
+        
+        function drawSystemTray() {
+            const trayX = canvas.width - 150;
+            const trayY = taskbarY + 5;
+            const trayWidth = 148;
+            const trayHeight = 40;
+            
+            // System tray background
+            const trayGradient = ctx.createLinearGradient(trayX, trayY, trayX, trayY + trayHeight);
+            trayGradient.addColorStop(0, '#2b7fd3');
+            trayGradient.addColorStop(1, '#1a4d7a');
+            ctx.fillStyle = trayGradient;
+            ctx.fillRect(trayX, trayY, trayWidth, trayHeight);
+            
+            // System tray border
+            ctx.strokeStyle = '#4a9ed6';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(trayX, trayY, trayWidth, trayHeight);
+        
+        }
+        
+        function drawClock() {
+            const clockX = canvas.width -13;
+            const clockY = taskbarY + 25;
+            
+            // Get current time
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const timeString = `${hours}:${minutes}`;
+            
+            // Draw time
+            ctx.font = 'bold 12px Arial';
+            ctx.textAlign = 'right';
+            ctx.textBaseline = 'middle';
+            ctx.fillStyle = '#ffffff';
+            ctx.fillText(timeString, clockX - 5, clockY);
+        }
+
+        //draw today's date on the left of the taskbar
+        function drawDate() {
+            const dateX = canvas.width - 5;
+            const dateY = taskbarY + 38;
+            
+            // Get current date
+            const today = new Date();
+            const day = String(today.getDate()).padStart(2, '0');
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const year = today.getFullYear();
+            const dateString = `${month}/${day}/${year}`;
+            
+            // Draw date
+            ctx.font = 'bold 10px Arial';
+            ctx.textAlign = 'right';
+            ctx.textBaseline = 'middle';
+            ctx.fillStyle = '#ffffff';
+            ctx.fillText(dateString, dateX - 5, dateY);
+        }
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            drawTaskbar();
+        });
+        
+        // Add mouse hover effects
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const mouseY = e.clientY - rect.top;
+            
+            // Change cursor when hovering over taskbar
+            if (mouseY > canvas.height - 50) {
+                canvas.style.cursor = 'pointer';
+            } else {
+                canvas.style.cursor = 'default';
+            }
+        });
+        
+        // Handle start button hover effect
+        const startButton = document.getElementById('start-button');
+        const glowingIcon = document.getElementById('glowing-icon');
+        
+        startButton.addEventListener('mouseenter', () => {
+            startButton.style.opacity = '0';
+            glowingIcon.style.opacity = '1';
+        });
+        
+        startButton.addEventListener('mouseleave', () => {
+            startButton.style.opacity = '1';
+            glowingIcon.style.opacity = '0';
+        });
+        
+        // Also handle hover on glowing icon to keep it visible
+        glowingIcon.addEventListener('mouseenter', () => {
+            glowingIcon.style.opacity = '1';
+        });
+        
+        glowingIcon.addEventListener('mouseleave', () => {
+            glowingIcon.style.opacity = '0';
+        });
+        
+        // Initial draw and update clock every second
+        drawTaskbar();
+        setInterval(drawTaskbar, 1000);
+    </script>
+</body>
+</html>
