@@ -45,8 +45,31 @@
     background: -webkit-gradient(linear, left top, left bottom, from(#cfeaf8), color-stop(45%, #65aac9), color-stop(45%, #3b90b5), to(#5db3de));
     background: linear-gradient(to bottom, #cfeaf8, #65aac9 45%, #3b90b5 45%, #5db3de);
 }
-#startmenu {
+.startmenu {
     display: none;
+}
+
+.startmenu{
+    transition: opacity 0.3s ease-in-out;
+}
+
+#triangle-right {
+	width: 0;
+	height: 0;
+	border-top: 6.25px solid transparent;
+	border-left: 9px solid #000;
+	border-bottom: 6.25px solid transparent;
+    position: absolute;
+    bottom: 120px;
+    left: 25px;
+}
+
+#startmenuapp {
+    opacity: 0;
+}
+
+#startmenuapp:hover {
+    opacity: 0.3;
 }
 
         </style>    
@@ -68,32 +91,65 @@
     <img src="icons8-signal-50.png" alt="Signal Icon" style="position: absolute; bottom: 15px; right: 125px; height: 20px; width: 20px;">
     <canvas class="item" style="position: absolute; top: 5px; left: 5px; height: 75px; width: 75px;"></canvas>
     <!--start menu-->
-   <canvas class="startmenu" style="position: absolute; bottom: 60px; left: 7.5px; height: 420px; width: 350px; background-color:#205c8d; border-radius: 2.5px; opacity: 0.6; display: none;"></canvas>
+   <canvas class="startmenu" style="position: absolute; bottom: 60px; left: 7.5px; height: 420px; width: 412.5px; background-color:#205c8d; border-radius: 2.5px; opacity: 0.6; display: none;"></canvas>
    <canvas class="startmenu" style="position: absolute; bottom: 62.25px; left: 12.25px; height: 410px; width: 230px; background-color:#205c8d; border-radius: 2.5px; opacity: 0.6; display: none;"></canvas>
    <canvas class="startmenu" style="position: absolute; bottom: 65px; left: 15px; height: 405px; width: 225px; background-color: white; border-radius: 2.5px; display: none;"></canvas>
+   <canvas class="startmenu" style="position: absolute; bottom: 320px; left: 245px; height: 2.5px; width: 155px; background-color: #205c8d; border-radius: 2.5px; display: none; border-radius: 5px; opacity: 0.5;"></canvas>
+   <canvas class="startmenu" style="position: absolute; bottom: 215px; left: 245px; height: 2.5px; width: 155px; background-color: #205c8d; border-radius: 2.5px; display: none; border-radius: 5px; opacity: 0.5;"></canvas>
    <input class="startmenu" type="text" placeholder="Search programs and files" style="position: absolute; bottom: 70px; left: 20px; width: 200px; height: 30px; border-radius: 5px; border: 1px solid #3f3f3f; padding-left: 10px; font-style: italic; display: none;">
    <img class="startmenu" src="télécharger.svg" style="height: 20px; width: 20px; position: absolute; bottom: 75px; left: 205px; display: none;" alt="Search Icon">
+       <!--start menu apps hover-->
+       <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 106.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
+    <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 146.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
+    <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 186.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
+    <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 226.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
+    <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 266.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
+    <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 306.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
+    <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 346.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
+    <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 386.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
+    <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 426.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
    <!--start menu icons-->
    <img class="startmenu" src="télécharger.webp" style="height: 30px; width: 30px; position: absolute; bottom: 150px; left: 17.5px; display: none;" alt="Snipping tool Icon">
    <img class="startmenu" src="Open-calc-in-Windows-logo.png" style="height: 30px; width: 45px; position: absolute; bottom: 190px; left: 10px; display: none;" alt="Calculator Icon">
-   <img class="startmenu" src="RemoteDesktop.webp" style="height: 35px; width: 35px; position: absolute; bottom: 230px; left: 20px; display: none;" alt="Remote Desktop Icon">
-   <img class="startmenu" src="sIH7Pq.png" style="height: 35px; width: 35px; position: absolute; bottom: 270px; left: 20px; transform: rotate(180deg); display: none;" alt="Paint Icon">
+   <img class="startmenu" src="RemoteDesktop.webp" style="height: 35px; width: 35px; position: absolute; bottom: 227.75px; left: 20px; display: none;" alt="Remote Desktop Icon">
+   <img class="startmenu" src="sIH7Pq.png" style="height: 35px; width: 35px; position: absolute; bottom: 267.5px; left: 20px; transform: rotate(180deg); display: none;" alt="Paint Icon">
    <img class="startmenu" src="windows_magnifier.png" style="height: 40px; width: 40px; position: absolute; bottom: 307.5px; left: 20px; display: none;" alt="Windows Magnifier Icon">
-   <img class="startmenu" src="notepad.webp" style="height: 35px; width: 35px; position: absolute; bottom: 350px; left: 22.5px; display: none;" alt="Notepad Icon">
-   <img class="startmenu" src="Windows_Media_Center_2006-2015.webp" style="height: 35px; width: 35px; position: absolute; bottom: 390px; left: 22.5px; display: none;" alt="Windows Media Center Icon">
-   <img class="startmenu" src="1616551859-0af1fb702b97ae9.png" style="height: 35px; width: 35px; position: absolute; bottom: 430px; left: 22.5px; display: none;" alt="Windows Icon">
+   <img class="startmenu" src="notepad.webp" style="height: 35px; width: 35px; position: absolute; bottom: 348px; left: 22.5px; display: none;" alt="Notepad Icon">
+   <img class="startmenu" src="Windows_Media_Center_2006-2015.webp" style="height: 35px; width: 35px; position: absolute; bottom: 387px; left: 22.5px; display: none;" alt="Windows Media Center Icon">
+   <img class="startmenu" src="1616551859-0af1fb702b97ae9.png" style="height: 35px; width: 35px; position: absolute; bottom: 427.5px; left: 22.5px; display: none;" alt="Windows Icon">
+   <div class="startmenu" id="triangle-right"></div>
    <!--user icon-->
-   <img src="user.webp" class="startmenu user" style="height: 45px; width: 45px; position: absolute; bottom: 450px; left: 270px; display: none;" alt="User Icon">
-   <canvas class="startmenu" style="border: 1px solid #3f3f3f; height: 45px; width: 45px; position: absolute; bottom: 455px; left: 275px; border-radius: 15%; display: none;"></canvas>
-   <!--text-->
-   <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 145px; left: 57.5px; color: black; font-size: 14px; display: none;">Snipping Tool</p>
-    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 185px; left: 57.5px; color: black; font-size: 14px; display: none;">Calculator</p>
-    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 225px; left: 57.5px; color: black; font-size: 14px; display: none;">Remote Desktop</p>
-    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 265px; left: 57.5px; color: black; font-size: 14px; display: none;">Paint</p>
-    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 305px; left: 57.5px; color: black; font-size: 14px; display: none;">Windows Magnifier</p>
-    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 345px; left: 57.5px; color: black; font-size: 14px; display: none;">Notepad</p>
-    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 385px; left: 57.5px; color: black; font-size: 14px; display: none;">Windows Media Center</p>
-    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 425px; left: 57.5px; color: black; font-size: 14px; display: none;">Windows Update</p>
+   <img src="user.webp" class="startmenu user" style="height: 45px; width: 45px; position: absolute; bottom: 450px; left: 310px; display: none;" alt="User Icon">
+   <canvas class="startmenu" style="border: 1px solid #3f3f3f; height: 45px; width: 45px; position: absolute; bottom: 455px; left: 315px; border-radius: 15%; display: none;"></canvas>
+   <!--start menu text-->
+   <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 102.5px; left: 57.5px; color: black; font-size: 14px; display: none;">All programs</p>
+   <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 142.5px; left: 57.5px; color: black; font-size: 14px; display: none;">Snipping Tool</p>
+    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 182.5px; left: 57.5px; color: black; font-size: 14px; display: none;">Calculator</p>
+    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 222.5px; left: 57.5px; color: black; font-size: 14px; display: none;">Remote Desktop</p>
+    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 262.5px; left: 57.5px; color: black; font-size: 14px; display: none;">Paint</p>
+    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 302.5px; left: 57.5px; color: black; font-size: 14px; display: none;">Windows Magnifier</p>
+    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 342.5px; left: 57.5px; color: black; font-size: 14px; display: none;">Notepad</p>
+    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 382.5px; left: 57.5px; color: black; font-size: 14px; display: none;">Windows Media Center</p>
+    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 422.5px; left: 57.5px; color: black; font-size: 14px; display: none;">Windows Update</p>
+    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 422.5px; left: 255px; color: white; font-size: 14px; display: none;">Guest</p>
+    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 387.5px; left: 255px; color: white; font-size: 14px; display: none;">Documents</p>
+    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 352.5px; left: 255px; color: white; font-size: 14px; display: none;">Pictures</p>
+    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 317.5px; left: 255px; color: white; font-size: 14px; display: none;">Music</p>
+    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 282.5px; left: 255px; color: white; font-size: 14px; display: none;">Games</p>
+    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 247.5px; left: 255px; color: white; font-size: 14px; display: none;">Computer</p>
+    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 212.5px; left: 255px; color: white; font-size: 14px; display: none;">Control Panel</p>
+    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 177.5px; left: 255px; color: white; font-size: 14px; display: none;">Devices and Printers</p>
+    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 142.5px; left: 255px; color: white; font-size: 14px; display: none;">Default Programs</p>
+    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 107.5px; left: 255px; color: white; font-size: 14px; display: none;">Help and Support</p>
+    <!--shutdown option-->
+    <a href="level 17.html">
+    <canvas class="startmenu" style="position: absolute; bottom: 70px; left: 250px; height: 25px; width: 73px; background-color: #49b2df; border-top-left-radius: 2.5px; border: 1.5px solid #205c8d;border-bottom-left-radius: 2.5px; border: 1.5px solid #205c8d; display: none; opacity: 0.8;"></canvas>
+    <canvas class="startmenu" style="position: absolute; bottom: 70px; left: 325px; height: 25px; width: 25px; background-color: #49b2df; border-top-right-radius: 2.5px; border: 1.5px solid #205c8d; border-bottom-right-radius: 2.5px; border: 1.5px solid #205c8d; display: none; opacity: 0.8;"></canvas>
+</a>
+    <div class="startmenu"style="position: absolute; bottom: 75px; left: 334.5px; width: 0; height: 0; border-top: 8.5px solid transparent; border-bottom: 8.5px solid transparent; border-left: 8.5px solid #000000;"></div>
+    <div class="startmenu"style="position: absolute; bottom: 75px; left: 334.25px; width: 0; height: 0; border-top: 8.5px solid transparent; border-bottom: 8.5px solid transparent; border-left: 8.5px solid #000000;"></div>
+    <div class="startmenu"style="position: absolute; bottom: 76.25px; left: 335px; width: 0; height: 0; border-top: 7.5px solid transparent; border-bottom: 7.5px solid transparent; border-left: 7.5px solid #ffffff;"></div>
+    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 62.5px; left: 255px; color: white; font-size: 14px; display: none;">Shutdown</p>
     <script>
             let menuOpen = false;
             let displaymenu = () => {
