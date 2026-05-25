@@ -71,6 +71,9 @@
 #startmenuapp:hover {
     opacity: 0.3;
 }
+/*#canvas1header {
+    cursor:move;
+}*/
 
         </style>    
 </head>
@@ -105,7 +108,7 @@
     <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 226.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
     <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 266.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
     <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 306.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
-    <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 346.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
+    <canvas class="startmenu notepadapp" id="startmenuapp" style="position: absolute; bottom: 346.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
     <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 386.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
     <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 426.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
    <!--start menu icons-->
@@ -114,7 +117,7 @@
    <img class="startmenu" src="RemoteDesktop.webp" style="height: 35px; width: 35px; position: absolute; bottom: 227.75px; left: 20px; display: none;" alt="Remote Desktop Icon">
    <img class="startmenu" src="sIH7Pq.png" style="height: 35px; width: 35px; position: absolute; bottom: 267.5px; left: 20px; transform: rotate(180deg); display: none;" alt="Paint Icon">
    <img class="startmenu" src="windows_magnifier.png" style="height: 40px; width: 40px; position: absolute; bottom: 307.5px; left: 20px; display: none;" alt="Windows Magnifier Icon">
-   <img class="startmenu" src="notepad.webp" style="height: 35px; width: 35px; position: absolute; bottom: 348px; left: 22.5px; display: none;" alt="Notepad Icon">
+   <img class="startmenu notepadapp" src="notepad.webp" style="height: 35px; width: 35px; position: absolute; bottom: 348px; left: 22.5px; display: none;" alt="Notepad Icon">
    <img class="startmenu" src="Windows_Media_Center_2006-2015.webp" style="height: 35px; width: 35px; position: absolute; bottom: 387px; left: 22.5px; display: none;" alt="Windows Media Center Icon">
    <img class="startmenu" src="1616551859-0af1fb702b97ae9.png" style="height: 35px; width: 35px; position: absolute; bottom: 427.5px; left: 22.5px; display: none;" alt="Windows Icon">
    <div class="startmenu" id="triangle-right"></div>
@@ -128,7 +131,7 @@
     <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 222.5px; left: 57.5px; color: black; font-size: 14px; display: none;">Remote Desktop</p>
     <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 262.5px; left: 57.5px; color: black; font-size: 14px; display: none;">Paint</p>
     <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 302.5px; left: 57.5px; color: black; font-size: 14px; display: none;">Windows Magnifier</p>
-    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 342.5px; left: 57.5px; color: black; font-size: 14px; display: none;">Notepad</p>
+    <p class="startmenu notepadapp" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 342.5px; left: 57.5px; color: black; font-size: 14px; display: none;">Notepad</p>
     <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 382.5px; left: 57.5px; color: black; font-size: 14px; display: none;">Windows Media Center</p>
     <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 422.5px; left: 57.5px; color: black; font-size: 14px; display: none;">Windows Update</p>
     <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 422.5px; left: 255px; color: white; font-size: 14px; display: none;">Guest</p>
@@ -150,7 +153,61 @@
     <div class="startmenu"style="position: absolute; bottom: 75px; left: 334.25px; width: 0; height: 0; border-top: 8.5px solid transparent; border-bottom: 8.5px solid transparent; border-left: 8.5px solid #000000;"></div>
     <div class="startmenu"style="position: absolute; bottom: 76.25px; left: 335px; width: 0; height: 0; border-top: 7.5px solid transparent; border-bottom: 7.5px solid transparent; border-left: 7.5px solid #ffffff;"></div>
     <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 62.5px; left: 255px; color: white; font-size: 14px; display: none;">Shutdown</p>
+    <!--notepad tab-->
+    <div id="canvas1" >
+    <canvas class="notepad" id="canvas1header" style="position: absolute; bottom: 65px; left: 243.5px; height: 460px; width: 365px; background-color: #3b90b5; border: 0.5px solid #000; border-radius: 5px; display: none;"></canvas>
+    <textarea class="notepad" style="position: absolute; bottom: 70px; left: 250px; height: 400px; width: 350px; background-color: white; border: 0.5px solid #000;  display: none;"></textarea>
+    <canvas class="notepad" style="position: absolute; bottom: 475px; left: 250px; height: 25px; width: 354px; background-color: silver; border: 0.5px solid #000; display: none;"></canvas>
+    <p class="notepad" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 467.5px; left: 260px; color: black; font-size: 14px; display: none;">File</p>
+    <p class="notepad" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 467.5px; left: 288.25px; color: black; font-size: 14px; display: none;">Edit</p>
+    <p class="notepad" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 467.5px; left: 320px; color: black; font-size: 14px; display: none;">Format</p>
+    <p class="notepad" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 467.5px; left: 370px; color: black; font-size: 14px; display: none;">View</p>
+    <p class="notepad" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 467.5px; left: 407.5px; color: black; font-size: 14px; display: none;">Help</p>
+    <p class="notepad" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 490px; left: 277.5px; color: black; font-size: 14px;text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 20px #fff,0 0 40px #fff; display: none;">Untitled - Notepad</p>
+    <img class="notepad" src="notepad.webp" style="position: absolute; bottom: 502px; left: 250px; height: 25px; width: 25px; display: none;" alt="Notepad Icon">
+    </div>
     <script>
+//Make the DIV element draggagle:
+/* dragElement(document.getElementById("canvas1"));
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+} */
+
             let menuOpen = false;
             let displaymenu = () => {
                 const startmenuItems = document.querySelectorAll('.startmenu');
@@ -162,6 +219,24 @@
                     menuOpen = true;
                 }
             };
+
+            let notepadOpen = false;
+            let displayNotepad = () => {
+                const notepadItems = document.querySelectorAll('.notepad');
+                if (notepadOpen) {
+                    notepadItems.forEach(item => item.style.display = 'none');
+                    notepadOpen = false;
+                } else {
+                    notepadItems.forEach(item => item.style.display = 'block');
+                    notepadOpen = true;
+                }
+            };
+
+            let notepadApp = document.querySelector('.notepadapp');
+            notepadApp.addEventListener('click', () => {
+                displayNotepad();
+            });
+
 
         const canvas = document.getElementById('taskbarCanvas');
         const ctx = canvas.getContext('2d');
