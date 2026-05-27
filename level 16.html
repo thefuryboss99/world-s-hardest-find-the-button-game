@@ -71,10 +71,74 @@
 #startmenuapp:hover {
     opacity: 0.3;
 }
-/*#canvas1header {
-    cursor:move;
-}*/
-
+        #canvas1 {
+            position: absolute;
+            bottom: 50px;
+            left: 243.5px;
+            width: 365px;
+            height: 520px;
+        }
+        #canvas1header {
+            cursor: move;
+            position: absolute;
+            top: 35px;
+            left: 0;
+            height: 460px;
+            width: 365px;
+            background-color: #3b90b5;
+            border: 0.5px solid #000;
+            border-radius: 5px;
+        }
+        .notepad-textarea {
+            position: absolute;
+            top: 97px;
+            left: 7.5px;
+            height: 390px;
+            width: 348px;
+            background-color: white;
+            border: 0.5px solid #000;
+            resize: none;
+        }
+        .menu-bar {
+            position: absolute;
+            top: 70px;
+            left: 7.5px;
+            height: 25px;
+            width: 352px;
+            background-color: silver;
+            border-top: 0.5px solid #000;
+            border-left: 0.5px solid #000;
+            border-right: 0.5px solid #000;
+        }
+        .menu-item {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            position: absolute;
+            top: 75px;
+            color: black;
+            font-size: 13px;
+            margin: 0;
+            cursor: default;
+            user-select: none;
+        }
+        .title-text {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            position: absolute;
+            top: 43px;
+            left: 35px;
+            color: black;
+            font-size: 14px;
+            text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 20px #fff,0 0 40px #fff;
+            margin: 0;
+            cursor: default;
+            user-select: none;
+        }
+        .notepad-icon {
+            position: absolute;
+            top: 39px;
+            left: 6px;
+            height: 25px;
+            width: 25px;
+        }
         </style>    
 </head>
 <body>
@@ -120,22 +184,22 @@
    <img class="startmenu notepadapp" src="notepad.webp" style="height: 35px; width: 35px; position: absolute; bottom: 348px; left: 22.5px; display: none;" alt="Notepad Icon">
    <img class="startmenu" src="Windows_Media_Center_2006-2015.webp" style="height: 35px; width: 35px; position: absolute; bottom: 387px; left: 22.5px; display: none;" alt="Windows Media Center Icon">
    <img class="startmenu" src="1616551859-0af1fb702b97ae9.png" style="height: 35px; width: 35px; position: absolute; bottom: 427.5px; left: 22.5px; display: none;" alt="Windows Icon">
-   <div class="startmenu" id="triangle-right"></div>
+   <div class="startmenu" id="triangle-right" style="user-select: none;"></div>
    <!--user icon-->
    <img src="user.webp" class="startmenu user" style="height: 45px; width: 45px; position: absolute; bottom: 450px; left: 310px; display: none;" alt="User Icon">
    <canvas class="startmenu" style="border: 1px solid #3f3f3f; height: 45px; width: 45px; position: absolute; bottom: 455px; left: 315px; border-radius: 15%; display: none;"></canvas>
    <!--start menu text-->
-   <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 102.5px; left: 57.5px; color: black; font-size: 14px; display: none;">All programs</p>
-   <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 142.5px; left: 57.5px; color: black; font-size: 14px; display: none;">Snipping Tool</p>
-    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 182.5px; left: 57.5px; color: black; font-size: 14px; display: none;">Calculator</p>
-    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 222.5px; left: 57.5px; color: black; font-size: 14px; display: none;">Remote Desktop</p>
-    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 262.5px; left: 57.5px; color: black; font-size: 14px; display: none;">Paint</p>
-    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 302.5px; left: 57.5px; color: black; font-size: 14px; display: none;">Windows Magnifier</p>
-    <p class="startmenu notepadapp" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 342.5px; left: 57.5px; color: black; font-size: 14px; display: none;">Notepad</p>
-    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 382.5px; left: 57.5px; color: black; font-size: 14px; display: none;">Windows Media Center</p>
-    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 422.5px; left: 57.5px; color: black; font-size: 14px; display: none;">Windows Update</p>
-    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 422.5px; left: 255px; color: white; font-size: 14px; display: none;">Guest</p>
-    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 387.5px; left: 255px; color: white; font-size: 14px; display: none;">Documents</p>
+   <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 102.5px; left: 57.5px; color: black; font-size: 14px; display: none; user-select: none;">All programs</p>
+   <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 142.5px; left: 57.5px; color: black; font-size: 14px; display: none; user-select: none;">Snipping Tool</p>
+    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 182.5px; left: 57.5px; color: black; font-size: 14px; display: none; user-select: none;">Calculator</p>
+    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 222.5px; left: 57.5px; color: black; font-size: 14px; display: none; user-select: none;">Remote Desktop</p>
+    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 262.5px; left: 57.5px; color: black; font-size: 14px; display: none; user-select: none;">Paint</p>
+    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 302.5px; left: 57.5px; color: black; font-size: 14px; display: none; user-select: none;">Windows Magnifier</p>
+    <p class="startmenu notepadapp" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 342.5px; left: 57.5px; color: black; font-size: 14px; display: none; user-select: none;">Notepad</p>
+    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 382.5px; left: 57.5px; color: black; font-size: 14px; display: none; user-select: none;">Windows Media Center</p>
+    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 422.5px; left: 57.5px; color: black; font-size: 14px; display: none; user-select: none;">Windows Update</p>
+    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 422.5px; left: 255px; color: white; font-size: 14px; display: none; user-select: none;">Guest</p>
+    <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 387.5px; left: 255px; color: white; font-size: 14px; display: none; user-select: none;">Documents</p>
     <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 352.5px; left: 255px; color: white; font-size: 14px; display: none;">Pictures</p>
     <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 317.5px; left: 255px; color: white; font-size: 14px; display: none;">Music</p>
     <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 282.5px; left: 255px; color: white; font-size: 14px; display: none;">Games</p>
@@ -154,22 +218,21 @@
     <div class="startmenu"style="position: absolute; bottom: 76.25px; left: 335px; width: 0; height: 0; border-top: 7.5px solid transparent; border-bottom: 7.5px solid transparent; border-left: 7.5px solid #ffffff;"></div>
     <p class="startmenu" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 62.5px; left: 255px; color: white; font-size: 14px; display: none;">Shutdown</p>
     <!--notepad tab-->
-    <div id="canvas1" >
-    <canvas class="notepad" id="canvas1header" style="position: absolute; bottom: 65px; left: 243.5px; height: 460px; width: 365px; background-color: #3b90b5; border: 0.5px solid #000; border-radius: 5px; display: none;"></canvas>
-    <textarea class="notepad" style="position: absolute; bottom: 70px; left: 250px; height: 400px; width: 350px; background-color: white; border: 0.5px solid #000;  display: none;"></textarea>
-		    <canvas class="notepad" style="height: 15px; width: 15px;background-color: white; position: absolute; bottom: 71px; left: 589.5px; border-radius: 5px; display: none;"></canvas>
-    <canvas class="notepad" style="position: absolute; bottom: 475px; left: 250px; height: 25px; width: 354px; background-color: silver; border: 0.5px solid #000; display: none;"></canvas>
-    <p class="notepad" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 467.5px; left: 260px; color: black; font-size: 14px; display: none;">File</p>
-    <p class="notepad" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 467.5px; left: 288.25px; color: black; font-size: 14px; display: none;">Edit</p>
-    <p class="notepad" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 467.5px; left: 320px; color: black; font-size: 14px; display: none;">Format</p>
-    <p class="notepad" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 467.5px; left: 370px; color: black; font-size: 14px; display: none;">View</p>
-    <p class="notepad" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 467.5px; left: 407.5px; color: black; font-size: 14px; display: none;">Help</p>
-    <p class="notepad" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; bottom: 490px; left: 277.5px; color: black; font-size: 14px;text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 20px #fff,0 0 40px #fff; display: none;">Untitled - Notepad</p>
-    <img class="notepad" src="notepad.webp" style="position: absolute; bottom: 502px; left: 250px; height: 25px; width: 25px; display: none;" alt="Notepad Icon">
+        <div id="canvas1">
+        <canvas class="notepad" id="canvas1header" style="display: none;"></canvas>
+        <textarea class="notepad-textarea notepad" placeholder="Start typing..." style="display: none;"></textarea>
+        <canvas class="menu-bar notepad" style="display: none;"></canvas>
+        <p class="menu-item notepad" style="left: 16px; display: none;">File</p>
+        <p class="menu-item notepad" style="left: 45px; display: none;">Edit</p>
+        <p class="menu-item notepad" style="left: 77px; display: none;">Format</p>
+        <p class="menu-item notepad" style="left: 130px; display: none;">View</p>
+        <p class="menu-item notepad" style="left: 168px; display: none;">Help</p>
+        <p class="title-text notepad" style="display: none;">Untitled - Notepad</p>
+        <img class="notepad-icon notepad" style="display: none;" src="notepad.webp" alt="Notepad Icon" onerror="this.style.display='none'">
     </div>
     <script>
 //Make the DIV element draggagle:
-/* dragElement(document.getElementById("canvas1"));
+dragElement(document.getElementById("canvas1"));
 
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -207,7 +270,7 @@ function dragElement(elmnt) {
     document.onmouseup = null;
     document.onmousemove = null;
   }
-} */
+}
 
             let menuOpen = false;
             let displaymenu = () => {
