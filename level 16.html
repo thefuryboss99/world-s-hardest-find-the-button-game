@@ -139,6 +139,25 @@
             height: 25px;
             width: 25px;
         }
+
+                #calculator {
+            background: linear-gradient(to bottom, #63b9ff 0%, #FFFFFF 15% , #FFFFFF 25%, #d3d5d6 35%, #ececec 70%);
+        }
+        #functionless {
+            pointer-events: none;
+            background-color: rgba(0.5, 0.5, 0.5, 0.5);
+        }
+        #drag-me {
+            position: absolute;
+            top: 50px;
+            left: 243.5px;
+        }
+        #grab {
+            cursor:move;
+        }
+        .calculator{
+            display:none;
+        }
         </style>    
 </head>
 <body>
@@ -167,8 +186,8 @@
    <img class="startmenu" src="télécharger.svg" style="height: 20px; width: 20px; position: absolute; bottom: 75px; left: 205px; display: none;" alt="Search Icon">
        <!--start menu apps hover-->
        <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 106.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
-    <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 146.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
-    <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 186.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
+    <canvas class="startmenu snipping-tool" id="startmenuapp" style="position: absolute; bottom: 146.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
+    <canvas class="startmenu calculatorapp" id="startmenuapp" style="position: absolute; bottom: 186.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
     <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 226.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
     <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 266.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
     <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 306.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
@@ -177,7 +196,7 @@
     <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 426.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
    <!--start menu icons-->
    <img class="startmenu" src="télécharger.webp" style="height: 30px; width: 30px; position: absolute; bottom: 150px; left: 17.5px; display: none;" alt="Snipping tool Icon">
-   <img class="startmenu" src="Open-calc-in-Windows-logo.png" style="height: 30px; width: 45px; position: absolute; bottom: 190px; left: 10px; display: none;" alt="Calculator Icon">
+   <img class="startmenu calculatorapp" src="Open-calc-in-Windows-logo.png" style="height: 30px; width: 45px; position: absolute; bottom: 190px; left: 10px; display: none;" alt="Calculator Icon">
    <img class="startmenu" src="RemoteDesktop.webp" style="height: 35px; width: 35px; position: absolute; bottom: 227.75px; left: 20px; display: none;" alt="Remote Desktop Icon">
    <img class="startmenu" src="sIH7Pq.png" style="height: 35px; width: 35px; position: absolute; bottom: 267.5px; left: 20px; transform: rotate(180deg); display: none;" alt="Paint Icon">
    <img class="startmenu" src="windows_magnifier.png" style="height: 40px; width: 40px; position: absolute; bottom: 307.5px; left: 20px; display: none;" alt="Windows Magnifier Icon">
@@ -220,7 +239,7 @@
     <!--notepad tab-->
         <div id="canvas1">
         <canvas class="notepad" id="canvas1header" style="display: none;"></canvas>
-        <textarea class="notepad-textarea notepad" placeholder="Start typing..." style="display: none;"></textarea>
+        <textarea class="notepad-textarea notepad" style="display: none;"></textarea>
         <canvas class="menu-bar notepad" style="display: none;"></canvas>
         <p class="menu-item notepad" style="left: 16px; display: none;">File</p>
         <p class="menu-item notepad" style="left: 45px; display: none;">Edit</p>
@@ -230,9 +249,57 @@
         <p class="title-text notepad" style="display: none;">Untitled - Notepad</p>
         <img class="notepad-icon notepad" style="display: none;" src="notepad.webp" alt="Notepad Icon" onerror="this.style.display='none'">
     </div>
+        <div id="drag-me">
+    <canvas class="calculator" id="calculator" style=" position:absolute; border: 1px solid #000;" width="300" height="455"></canvas>
+    <input class="calculator" readonly id="Display" style="position:absolute;left: 12.5px; top: 100px; border: 1px solid #000; width:267.5px; height:67.5px;"></input>
+<canvas class="calculator" id="grab" style=" position:absolute; border: 1px solid #000;" width="300" height="50"></canvas>
+<img class="calculator" src="Open-calc-in-Windows-logo.png" style="position:absolute; left: 5px; top: 12.5px; width: 35px; height: 25px;">
+    <p class="calculator" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; top: 0px; left: 50px;">Calculator</p>
+    <button class="calculator" onclick="displayCalculator()" style="position:absolute;left: 262.5px; top: 12.5px; height: 25px; width:25px; background-color: rgba(0, 0, 0, 0);border: 0px">X</button>
+<p class="calculator" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; top: 50px; left: 15px;">View</p>
+<p class="calculator" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; top: 50px; left: 67.5px;">Edit</p>
+<p class="calculator" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: absolute; top: 50px; left: 115px;">Help</p>
+<!--keys-->
+<div class="calculator" id="keys">
+<button class="calculator" onclick="removecharacter()" id="←" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 12.5px; top: 227.5px; height: 40px; width: 45px; background-color: rgba(0, 0, 0, 0); border-radius: 5px; border: 1px solid #000;">←</button>
+<button class="calculator" onclick="cleardisplay()" id="c" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 127.5px; top: 227.5px; height: 40px; width: 45px; background-color: rgba(0, 0, 0, 0); border-radius: 5px; border: 1px solid #000;">C</button>
+<button class="calculator" onclick="appendToDisplay('7')" id="7" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 12.5px; top: 272.5px; height: 40px; width: 45px; background-color: rgba(0, 0, 0, 0); border-radius: 5px; border: 1px solid #000;">7</button>
+<button class="calculator" onclick="appendToDisplay('8')" id="8" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 70px; top: 272.5px; height: 40px; width: 45px; background-color: rgba(0, 0, 0, 0); border-radius: 5px; border: 1px solid #000;">8</button>
+<button class="calculator" onclick="appendToDisplay('9')" id="9" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 127.5px; top: 272.5px; height: 40px; width: 45px; background-color: rgba(0, 0, 0, 0); border-radius: 5px; border: 1px solid #000;">9</button>
+<button class="calculator" onclick="appendToDisplay('÷')"id="/" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 185px; top: 272.5px; height: 40px; width: 45px; background-color: rgba(0, 0, 0, 0); border-radius: 5px; border: 1px solid #000;">/</button>
+<button class="calculator" onclick="appendToDisplay('4')" id="4" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 12.5px; top: 317.5px; height: 40px; width: 45px; background-color: rgba(0, 0, 0, 0); border-radius: 5px; border: 1px solid #000;">4</button>
+<button class="calculator" onclick="appendToDisplay('5')" id="5" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 70px; top: 317.5px; height: 40px; width: 45px; background-color: rgba(0, 0, 0, 0); border-radius: 5px; border: 1px solid #000;">5</button>
+<button class="calculator" onclick="appendToDisplay('6')" id="6" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 127.5px; top: 317.5px; height: 40px; width: 45px; background-color: rgba(0, 0, 0, 0); border-radius: 5px; border: 1px solid #000;">6</button>
+<button class="calculator" onclick="appendToDisplay('×')" id="*" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 185px; top: 317.5px; height: 40px; width: 45px; background-color: rgba(0, 0, 0, 0); border-radius: 5px; border: 1px solid #000;">*</button>
+<button class="calculator" onclick="appendToDisplay('3')" id="3" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 12.5px; top: 362.5px; height: 40px; width: 45px; background-color: rgba(0, 0, 0, 0); border-radius: 5px; border: 1px solid #000;">3</button>
+<button class="calculator" onclick="appendToDisplay('2')" id="2" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 70px; top: 362.5px; height: 40px; width: 45px; background-color: rgba(0, 0, 0, 0); border-radius: 5px; border: 1px solid #000;">2</button>
+<button class="calculator" onclick="appendToDisplay('1')" id="1" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 127.5px; top: 362.5px; height: 40px; width: 45px; background-color: rgba(0, 0, 0, 0); border-radius: 5px; border: 1px solid #000;">1</button>
+<button class="calculator" onclick="appendToDisplay('−')" id="-" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 185px; top: 362.5px; height: 40px; width: 45px; background-color: rgba(0, 0, 0, 0); border-radius: 5px; border: 1px solid #000;">-</button>
+<button class="calculator" onclick="calculate()" id="=" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 242.5px; top: 362.5px; height: 85px; width:45px; background-color: rgba(0, 0, 0, 0); border-radius: 5px; border: 1px solid #000;">=</button>
+<button class="calculator" onclick="appendToDisplay('0')" id="0" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 12.5px; top: 407.5px; height: 40px; width: 105px; background-color: rgba(0, 0, 0, 0); border-radius: 5px; border: 1px solid #000;">0</button>
+<button class="calculator" onclick="appendToDisplay('.')" id="." style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 127.5px; top: 407.5px; height: 40px; width: 45px; background-color: rgba(0, 0, 0, 0); border-radius: 5px; border: 1px solid #000;">.</button>
+<button class="calculator" onclick="appendToDisplay('+')" id="+" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 185px; top: 407.5px; height: 40px; width: 45px; background-color: rgba(0, 0, 0, 0); border-radius: 5px; border: 1px solid #000;">+</button>
+</div>
+<!--no function implemented--> 
+<button class="calculator" id="ce functionless" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 70px; top: 227.5px; height: 40px; width: 45px; border-radius: 5px; border: 1px solid #000;">CE</button>
+<button class="calculator" id="m+ functionless" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 242.5px; top: 182.5px; height: 40px; width:45px; border-radius: 5px; border: 1px solid #000;">M+</button>
+<button class="calculator" id="mc functionless" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 12.5px; top: 182.5px; height: 40px; width: 45px; border-radius: 5px; border: 1px solid #000;">MC</button>
+<button class="calculator" id="mr functionless" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 70px; top: 182.5px; height: 40px; width: 45px; border-radius: 5px; border: 1px solid #000;">MR</button>
+<button class="calculator" id="ms functionless" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 127.5px; top: 182.5px; height: 40px; width: 45px; border-radius: 5px; border: 1px solid #000;">MS</button>
+<button class="calculator" id="m- functionless" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 185px; top: 182.5px; height: 40px; width: 45px; border-radius: 5px; border: 1px solid #000;">M-</button>
+<button class="calculator" id="± functionless" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 185px; top: 227.5px; height: 40px; width: 45px; border-radius: 5px; border: 1px solid #000;">±</button>
+<button class="calculator" id="√ functionless" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 242.5px; top: 227.5px; height: 40px; width:45px; border-radius: 5px; border: 1px solid #000;">√</button>
+<button class="calculator" id="% functionless" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 242.5px; top: 272.5px; height: 40px; width:45px; border-radius: 5px; border: 1px solid #000;">%</button>
+<button class="calculator"id="1/x functionless" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;position:absolute;left: 242.5px; top: 317.5px; height: 40px; width:45px; border-radius: 5px; border: 1px solid #000;">1/x</button>
+</div>
     <script>
+        //makes the snipping tool do the command crtl + shift + s on click
+        let snippingTool = document.querySelector('.snipping-tool');
+        snippingTool.addEventListener('click', () => {
+        });
 //Make the DIV element draggagle:
 dragElement(document.getElementById("canvas1"));
+dragElement(document.getElementById("drag-me"));
 
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -271,6 +338,23 @@ function dragElement(elmnt) {
     document.onmousemove = null;
   }
 }
+    let display = document.getElementById('Display');
+    function appendToDisplay(value) {
+        display.value += value;
+    }
+    function cleardisplay() {
+        display.value = '';
+    }
+    function calculate() {
+        try {
+            display.value = eval(display.value.replace(/÷/g, '/').replace(/×/g, '*').replace(/−/g, '-'));
+        } catch (e) {
+            display.value = 'Error';
+        }
+    }
+    let removecharacter = () => {
+        display.value = display.value.slice(0, -1);
+    };
 
             let menuOpen = false;
             let displaymenu = () => {
@@ -301,6 +385,21 @@ function dragElement(elmnt) {
                 displayNotepad();
             });
 
+            let calculatorOpen = false;
+            let displayCalculator = () => {
+                const calculatorItems = document.querySelectorAll('.calculator');
+                if (calculatorOpen) {
+                    calculatorItems.forEach(item => item.style.display = 'none');
+                    calculatorOpen = false;
+                } else {
+                    calculatorItems.forEach(item => item.style.display = 'block');
+                    calculatorOpen = true;
+                }
+            };
+            let calculatorApp = document.querySelector('.calculatorapp');
+            calculatorApp.addEventListener('click', () => {
+                displayCalculator();
+            });
 
         const canvas = document.getElementById('taskbarCanvas');
         const ctx = canvas.getContext('2d');
