@@ -297,47 +297,62 @@
         let snippingTool = document.querySelector('.snipping-tool');
         snippingTool.addEventListener('click', () => {
         });
-//Make the DIV element draggagle:
-dragElement(document.getElementById("canvas1"));
-dragElement(document.getElementById("drag-me"));
+//Make the DIV element draggagle for both the calculator and notepad:
+(function() {
+  const boxes = [document.getElementById('drag-me'), document.getElementById('canvas1')];
+  boxes.forEach(box => box.style.position = 'absolute');
+  
+  let currentBox = null;
+  let offsetX = 0, offsetY = 0;
+  let isDragging = false;
 
-function dragElement(elmnt) {
-  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  if (document.getElementById(elmnt.id + "header")) {
-    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-  } else {
-    elmnt.onmousedown = dragMouseDown;
-  }
-
-  function dragMouseDown(e) {
-    e = e || window.event;
+  // Start drag (mouse + touch)
+  function startDrag(e) {
     e.preventDefault();
-    // get the mouse cursor position at startup:
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    document.onmouseup = closeDragElement;
-    // call a function whenever the cursor moves:
-    document.onmousemove = elementDrag;
+    isDragging = true;
+    currentBox = this;
+
+    const clientX = e.type.startsWith('touch') ? e.touches[0].clientX : e.clientX;
+    const clientY = e.type.startsWith('touch') ? e.touches[0].clientY : e.clientY;
+
+    const rect = currentBox.getBoundingClientRect();
+    offsetX = clientX - rect.left;
+    offsetY = clientY - rect.top;
+
+    currentBox.style.cursor = 'grabbing';
   }
 
-  function elementDrag(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // calculate the new cursor position:
-    pos1 = pos3 - e.clientX;
-    pos2 = pos4 - e.clientY;
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    // set the element's new position:
-    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  // Drag move
+  function onDrag(e) {
+    if (!isDragging || !currentBox) return;
+
+    const clientX = e.type.startsWith('touch') ? e.touches[0].clientX : e.clientX;
+    const clientY = e.type.startsWith('touch') ? e.touches[0].clientY : e.clientY;
+
+    currentBox.style.left = (clientX - offsetX) + 'px';
+    currentBox.style.top = (clientY - offsetY) + 'px';
   }
 
-  function closeDragElement() {
-    document.onmouseup = null;
-    document.onmousemove = null;
+  // End drag
+  function endDrag() {
+    isDragging = false;
+    if (currentBox) {
+      currentBox.style.cursor = 'grab';
+      currentBox = null;
+    }
   }
-}
+
+  // Attach event listeners to both boxes
+  boxes.forEach(box => {
+    box.addEventListener('mousedown', startDrag);
+    box.addEventListener('touchstart', startDrag, { passive: false });
+  });
+
+  document.addEventListener('mousemove', onDrag);
+  document.addEventListener('mouseup', endDrag);
+  document.addEventListener('touchmove', onDrag, { passive: false });
+  document.addEventListener('touchend', endDrag);
+})();
     let display = document.getElementById('Display');
     function appendToDisplay(value) {
         display.value += value;
