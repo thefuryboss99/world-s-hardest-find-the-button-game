@@ -153,7 +153,7 @@
             left: 243.5px;
         }
         #grab {
-            cursor:move;
+            cursor:grab;
         }
         .calculator{
             display:none;
@@ -186,13 +186,13 @@
    <img class="startmenu" src="télécharger.svg" style="height: 20px; width: 20px; position: absolute; bottom: 75px; left: 205px; display: none;" alt="Search Icon">
        <!--start menu apps hover-->
        <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 106.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
-    <canvas class="startmenu snipping-tool" id="startmenuapp" style="position: absolute; bottom: 146.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
+    <canvas class="startmenu snipping-tool nonfunc" id="startmenuapp" style="position: absolute; bottom: 146.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
     <canvas class="startmenu calculatorapp" id="startmenuapp" style="position: absolute; bottom: 186.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
-    <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 226.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
-    <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 266.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
-    <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 306.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
+    <canvas class="startmenu nonfunc" id="startmenuapp" style="position: absolute; bottom: 226.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
+    <canvas class="startmenu nonfunc" id="startmenuapp" style="position: absolute; bottom: 266.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
+    <canvas class="startmenu nonfunc" id="startmenuapp" style="position: absolute; bottom: 306.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
     <canvas class="startmenu notepadapp" id="startmenuapp" style="position: absolute; bottom: 346.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
-    <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 386.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
+    <canvas class="startmenu nonfunc" id="startmenuapp" style="position: absolute; bottom: 386.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
     <canvas class="startmenu" id="startmenuapp" style="position: absolute; bottom: 426.25px; left: 17.5px; height: 35px; width: 218px; background-color: #49b2df; border-radius: 2.5px; border: 1.5px solid #205c8d;"></canvas>
    <!--start menu icons-->
    <img class="startmenu" src="télécharger.webp" style="height: 30px; width: 30px; position: absolute; bottom: 150px; left: 17.5px; display: none;" alt="Snipping tool Icon">
@@ -295,8 +295,26 @@
     <script>
         //makes the snipping tool do the command crtl + shift + s on click
         let snippingTool = document.querySelector('.snipping-tool');
-        snippingTool.addEventListener('click', () => {
-        });
+        let nonfunc = document.querySelectorAll('.nonfunc');
+  // non-working code for apps (very cool jumpscare tho)
+    nonfunc.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        // Create a Blob with the content you want to save
+        const content = 'Hey, so i cant make this work but since you pressed this, now i have your ip address Bye :D';
+        const blob = new Blob([content], { type: 'text/plain' });
+
+      // Create a temporary link element
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'Warning.txt'; // Specify the filename
+
+      // Programmatically click the link to trigger the download
+      link.click();
+
+      // Clean up the URL object
+      URL.revokeObjectURL(link.href);
+    });
+});
 //Make the DIV element draggagle for both the calculator and notepad:
 (function() {
   const boxes = [document.getElementById('drag-me'), document.getElementById('canvas1')];
@@ -319,7 +337,7 @@
     offsetX = clientX - rect.left;
     offsetY = clientY - rect.top;
 
-    currentBox.style.cursor = 'grabbing';
+    currentBox.style.cursor = 'select';
   }
 
   // Drag move
@@ -337,7 +355,7 @@
   function endDrag() {
     isDragging = false;
     if (currentBox) {
-      currentBox.style.cursor = 'grab';
+      currentBox.style.cursor = 'select';
       currentBox = null;
     }
   }
@@ -353,6 +371,7 @@
   document.addEventListener('touchmove', onDrag, { passive: false });
   document.addEventListener('touchend', endDrag);
 })();
+
     let display = document.getElementById('Display');
     function appendToDisplay(value) {
         display.value += value;
