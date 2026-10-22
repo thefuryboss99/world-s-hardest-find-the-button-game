@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>find the button!</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #160000;
+        }
+
+        #pixelBackground {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            image-rendering: pixelated;
+            z-index: 0;
+            visibility: hidden;
+        }
+
+        #levelTitle {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            margin: 0;
+            transform: translateX(-50%);
+            z-index: 1;
+            color: white;
+            font-size: 32px;
+            text-shadow: 0 2px 5px #000;
+        }
+
+        body.minigame-active #pixelBackground {
+            visibility: visible;
+        }
+
+        #glitchLayer {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        #jumpscareRansom,
+        .goldPickup,
+        .stop-ransom-copy,
+        #thankYouMessage {
+            animation-name: pictureShake;
+            animation-duration: 90ms;
+            animation-timing-function: steps(2, end);
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes pictureShake {
+            0% { translate: 0 0; }
+            25% { translate: -3px 2px; }
+            50% { translate: 3px -2px; }
+            75% { translate: -2px -2px; }
+            100% { translate: 2px 2px; }
+        }
+
+        .glitch-image {
+            position: absolute;
+            object-fit: cover;
+            animation:
+                glitchPopup 1800ms ease-in-out both,
+                glitchFlicker 180ms steps(2, end) infinite alternate,
+                glitchShake 90ms steps(2, end) infinite;
+        }
+
+        @keyframes glitchPopup {
+            0% { opacity: 0; transform: scale(0.05); }
+            14% { opacity: 0.9; transform: scale(1.08); }
+            22% { opacity: 0.78; transform: scale(1); }
+            78% { opacity: 0.78; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.08); }
+        }
+
+        @keyframes glitchFlicker {
+            from { opacity: 0.4; filter: hue-rotate(0deg); }
+            to { opacity: 0.95; filter: hue-rotate(80deg); }
+        }
+
+        @keyframes glitchShake {
+            0% { translate: 0 0; }
+            25% { translate: -4px 2px; }
+            50% { translate: 3px -3px; }
+            75% { translate: -2px -1px; }
+            100% { translate: 4px 2px; }
+        }
+
+        #goldCounter {
+            position: fixed;
+            z-index: 3;
+            top: 12px;
+            left: 12px;
+            margin: 0;
+            padding: 8px 12px;
+            color: #fff;
+            font-size: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #ffe778;
+        }
+
+        #jumpscareTimer {
+            position: fixed;
+            z-index: 4;
+            top: 12px;
+            right: 12px;
+            margin: 0;
+            padding: 8px 12px;
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+            background: rgba(90, 0, 0, 0.9);
+            border: 2px solid #ff4b4b;
+            animation: pictureShake 90ms steps(2, end) infinite;
+        }
+
+        .goldPickup {
+            position: fixed;
+            z-index: 3;
+            width: 46px;
+            height: 46px;
+            padding: 0;
+            border: 0;
+            background: transparent;
+            cursor: pointer;
+            filter: drop-shadow(0 0 7px #ffd700);
+            animation:
+                goldBob 650ms ease-in-out infinite alternate,
+                pictureShake 90ms steps(2, end) infinite;
+        }
+
+        .goldPickup img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .goldPickup.isSpecial {
+            width: 68px;
+            height: 68px;
+            filter: drop-shadow(0 0 12px #ff8c00);
+        }
+
+        @keyframes goldBob {
+            to { transform: translateY(-9px) rotate(8deg); }
+        }
+
+        #nextLevel {
+            position: fixed;
+            z-index: 7;
+            top: 50%;
+            left: 50%;
+            padding: 18px 28px;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            background: #a40000;
+            border: 3px solid #fff;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 0 24px #000;
+        }
+
+        #thankYouMessage {
+            position: fixed;
+            z-index: 6;
+            top: 50%;
+            left: 50%;
+            width: min(80vw, 600px);
+            max-height: 80vh;
+            object-fit: contain;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 36px #000;
+            animation:
+                thankYouPop 700ms cubic-bezier(0.2, 1.4, 0.4, 1) both,
+                pictureShake 90ms steps(2, end) infinite;
+        }
+
+        @keyframes thankYouPop {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.05); }
+            65% { opacity: 1; transform: translate(-50%, -50%) scale(1.12); }
+            82% { transform: translate(-50%, -50%) scale(0.92); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        #ransom {
+            position: absolute;
+            top: 300px;
+            left: 50%;
+            width: 50px;
+            height: 60px;
+            transform: translateX(-50%);
+            z-index: 1;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #spawnedRansom {
+            position: fixed;
+            z-index: 2;
+            width: min(25vw, 300px);
+            height: auto;
+            object-fit: contain;
+            transform: translate(-50%, -50%);
+        }
+
+        #jumpscareRansom {
+            position: fixed;
+            z-index: 3;
+            top: 50%;
+            left: 50%;
+            width: min(70vw, 700px);
+            height: min(80vh, 700px);
+            object-fit: contain;
+            transform: translate(-50%, -50%);
+        }
+
+        #downloadPanel {
+            position: fixed;
+            z-index: 4;
+            top: 50%;
+            left: 50%;
+            width: min(330px, 88vw);
+            padding: 8px;
+            transform: translate(-50%, -50%);
+            background: rgba(25, 0, 0, 0.9);
+            border: 2px solid #7e1515;
+            box-shadow: 0 0 24px #000;
+        }
+
+        #downloadHeading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 24px;
+            gap: 2px;
+        }
+
+        #downloadHeading img {
+            display: block;
+            max-width: 70%;
+            height: 20px;
+            object-fit: contain;
+        }
+
+        #loadingDots {
+            display: flex;
+            align-items: center;
+            height: 20px;
+            gap: 1px;
+        }
+
+        #loadingDots img {
+            width: 9px;
+            height: 9px;
+            object-fit: contain;
+        }
+
+        #progressTrack {
+            position: relative;
+            width: 100%;
+            height: 20px;
+            margin-top: 6px;
+            overflow: hidden;
+            background: #080808;
+            animation: downloadShake 90ms steps(2, end) infinite;
+        }
+
+        @keyframes downloadShake {
+            0% { translate: 0 0; }
+            25% { translate: -2px 1px; }
+            50% { translate: 2px -1px; }
+            75% { translate: -1px -1px; }
+            100% { translate: 2px 1px; }
+        }
+
+        #progressFrame {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+            pointer-events: none;
+        }
+
+        #progressFill {
+            position: absolute;
+            top: 2px;
+            bottom: 2px;
+            left: 2px;
+            width: 0;
+            overflow: hidden;
+            transition: width 45ms linear;
+        }
+
+        #progressFill img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+        }
+
+        #downloadPercent {
+            margin: 4px 0 0;
+            color: #fff;
+            font-size: 12px;
+            text-align: center;
+            text-shadow: 0 1px 3px #000;
+        }
+
+        #stopRansomCopies {
+            position: fixed;
+            z-index: 5;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .stop-ransom-copy {
+            position: absolute;
+            width: clamp(60px, 14vw, 180px);
+            height: clamp(60px, 14vw, 180px);
+            object-fit: cover;
+            animation:
+                stopPop 280ms ease-out both,
+                pictureShake 90ms steps(2, end) infinite;
+        }
+
+        @keyframes stopPop {
+            from { opacity: 0; transform: scale(0.15) rotate(-18deg); }
+            to { opacity: 0.92; transform: scale(1) rotate(0); }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="pixelBackground" aria-hidden="true"></canvas>
+    <div id="glitchLayer" class="hidden" aria-hidden="true"></div>
+    <h1 id="levelTitle">LEVEL 17</h1>
+    <img id="ransom" src="Capture d'écran 2026-10-22 150955.png" alt="Start the encounter">
+    <img id="spawnedRansom" class="hidden" src="A-90IDLE.webp" alt="Ransom">
+    <img id="jumpscareRansom" class="hidden" src="A-90JUMPSCARE.webp" alt="Ransom jumpscare">
+
+    <section id="downloadPanel" class="hidden" aria-live="polite" aria-label="Downloading">
+        <div id="downloadHeading">
+            <img src="Capture d’écran 2026-10-22 172108-DOWNLOADING.png" alt="Downloading">
+            <span id="loadingDots" aria-hidden="true"></span>
+        </div>
+        <div id="progressTrack" role="progressbar" aria-label="Download progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <img id="progressFrame" src="Capture d’écran 2026-10-22 172108-BAR.png" alt="">
+            <div id="progressFill">
+                <img src="Capture d’écran 2026-10-22 172108-PERCENTAGE.png" alt="">
+            </div>
+        </div>
+        <p id="downloadPercent">0%</p>
+    </section>
+    <div id="stopRansomCopies" class="hidden" aria-hidden="true"></div>
+    <p id="goldCounter" class="hidden" aria-live="polite">Gold: <span id="goldCount">0</span>/500</p>
+    <p id="jumpscareTimer" class="hidden" aria-live="off">Jumpscare in <span id="jumpscareSeconds">90</span>s</p>
+    <div id="goldField"></div>
+    <img id="thankYouMessage" class="hidden" src="ThankYouRansom.jpg" alt="Thank you">
+    <a id="nextLevel" class="hidden" href="level 18.html">NEXT LEVEL</a>
+    <audio id="notificationSound" src="ransom_notification.mp3" preload="auto"></audio>
+    <audio id="themeSound" src="Ransom_full_theme.wav" preload="auto"></audio>
+    <audio id="attackSound" src="a90-attack.mp3" preload="auto"></audio>
+    <audio id="payoffSound" src="Ransomsuccess_74683588362771.ogg" preload="auto"></audio>
+
+    <script>
+        const pixelCanvas = document.getElementById("pixelBackground");
+        const pixelContext = pixelCanvas.getContext("2d");
+        const sourceImage = new Image();
+        let pixelData;
+        let pixelWidth = 0;
+        let pixelHeight = 0;
+        const pixelSize = 12;
+
+        function drawPixelBackground() {
+            if (!sourceImagePixels.length) {
+                return;
+            }
+
+            pixelWidth = Math.max(1, Math.ceil(window.innerWidth / pixelSize));
+            pixelHeight = Math.max(1, Math.ceil(window.innerHeight / pixelSize));
+            pixelCanvas.width = pixelWidth;
+            pixelCanvas.height = pixelHeight;
+
+            const sourceCanvas = document.createElement("canvas");
+            sourceCanvas.width = pixelWidth;
+            sourceCanvas.height = pixelHeight;
+            const sourceContext = sourceCanvas.getContext("2d", { willReadFrequently: true });
+            sourceContext.imageSmoothingEnabled = false;
+            sourceContext.drawImage(sourceImage, 0, 0, pixelWidth, pixelHeight);
+            pixelData = sourceContext.getImageData(0, 0, pixelWidth, pixelHeight);
+            pixelContext.putImageData(pixelData, 0, 0);
+        }
+
+        window.addEventListener("resize", drawPixelBackground);
+        window.setInterval(function() {
+            if (!pixelData || !pixelWidth || !pixelHeight) {
+                return;
+            }
+
+            const data = pixelData.data;
+            const changes = Math.max(1, Math.floor(pixelWidth * pixelHeight * 0.06));
+            for (let index = 0; index < changes; index++) {
+                const pixel = Math.floor(Math.random() * pixelWidth * pixelHeight);
+                const sourceX = Math.floor(Math.random() * sourceImage.naturalWidth);
+                const sourceY = Math.floor(Math.random() * sourceImage.naturalHeight);
+                const sourceIndex = (sourceY * sourceImage.naturalWidth + sourceX) * 4;
+                const targetIndex = pixel * 4;
+                data[targetIndex] = sourceImagePixels[sourceIndex];
+                data[targetIndex + 1] = sourceImagePixels[sourceIndex + 1];
+                data[targetIndex + 2] = sourceImagePixels[sourceIndex + 2];
+                data[targetIndex + 3] = sourceImagePixels[sourceIndex + 3];
+            }
+            pixelContext.putImageData(pixelData, 0, 0);
+        }, 100);
+
+        let sourceImagePixels = [];
+        sourceImage.onload = function() {
+            const sourceCanvas = document.createElement("canvas");
+            sourceCanvas.width = sourceImage.naturalWidth;
+            sourceCanvas.height = sourceImage.naturalHeight;
+            const sourceContext = sourceCanvas.getContext("2d", { willReadFrequently: true });
+            sourceContext.drawImage(sourceImage, 0, 0);
+            sourceImagePixels = sourceContext.getImageData(0, 0, sourceCanvas.width, sourceCanvas.height).data;
+            drawPixelBackground();
+        };
+        sourceImage.src = "Capture d'écran 2026-10-22 173409.png";
+
+        const startButton = document.getElementById("ransom");
+        const idleRansom = document.getElementById("spawnedRansom");
+        const jumpscareRansom = document.getElementById("jumpscareRansom");
+        const downloadPanel = document.getElementById("downloadPanel");
+        const progressTrack = document.getElementById("progressTrack");
+        const progressFill = document.getElementById("progressFill");
+        const downloadPercent = document.getElementById("downloadPercent");
+        const loadingDots = document.getElementById("loadingDots");
+        const stopRansomCopies = document.getElementById("stopRansomCopies");
+        const glitchLayer = document.getElementById("glitchLayer");
+        const goldField = document.getElementById("goldField");
+        const goldCounter = document.getElementById("goldCounter");
+        const goldCount = document.getElementById("goldCount");
+        const jumpscareTimer = document.getElementById("jumpscareTimer");
+        const jumpscareSeconds = document.getElementById("jumpscareSeconds");
+        const nextLevel = document.getElementById("nextLevel");
+        const thankYouMessage = document.getElementById("thankYouMessage");
+        const notificationSound = document.getElementById("notificationSound");
+        const themeSound = document.getElementById("themeSound");
+        const attackSound = document.getElementById("attackSound");
+        const payoffSound = document.getElementById("payoffSound");
+        const glitchImages = [
+            "all-of-ransoms-pop-ups-i-think-v0-evu5f6fliurh1.webp",
+            "95z837fliurh1.jpg",
+            "52q3m6fliurh1.jpg",
+            "8rl2jufliurh1.jpg",
+            "nzxr87fliurh1.jpg",
+            "vb9496fliurh1.jpg",
+            "wejwb6fliurh1.jpg"
+        ];
+        const goldGoal = 500;
+        const goldPickupValue = 5;
+        const specialPickupChance = 0.005;
+        const goldOnScreen = 12;
+        const jumpscareDelay = 90;
+        let encounterActive = false;
+        let scareTimeout;
+        let progressInterval;
+        let dotInterval;
+        let stopRansomInterval;
+        let countdownInterval;
+        let glitchPopupInterval;
+        let collectedGold = 0;
+        let completionTimeout;
+        function playSoundUntilEnd(sound) {
+            sound.currentTime = 0;
+            return new Promise(function(resolve) {
+                let settled = false;
+                function finish() {
+                    if (settled) {
+                        return;
+                    }
+                    settled = true;
+                    sound.removeEventListener("ended", finish);
+                    sound.removeEventListener("error", handleError);
+                    resolve();
+                }
+                function handleError() {
+                    console.error("Could not play " + sound.src, sound.error);
+                    finish();
+                }
+
+                sound.addEventListener("ended", finish);
+                sound.addEventListener("error", handleError);
+                const playback = sound.play();
+                if (playback) {
+                    playback.catch(function(error) {
+                        console.error("Could not play " + sound.src, error);
+                        finish();
+                    });
+                }
+            });
+        }
+
+        function playSound(sound) {
+            sound.currentTime = 0;
+            const playback = sound.play();
+            if (playback) {
+                playback.catch(function(error) {
+                    console.error("Could not play " + sound.src, error);
+                });
+            }
+        }
+
+        function setLoadingDots(count) {
+            loadingDots.replaceChildren();
+            for (let index = 0; index < count; index++) {
+                const dot = document.createElement("img");
+                dot.src = "Capture d’écran 2026-10-22 172108-DOT.png";
+                dot.alt = "";
+                loadingDots.appendChild(dot);
+            }
+        }
+
+        function finishDownload() {
+            downloadPanel.classList.add("hidden");
+            window.clearInterval(stopRansomInterval);
+            stopRansomCopies.replaceChildren();
+            stopRansomCopies.classList.add("hidden");
+            notificationSound.pause();
+            notificationSound.currentTime = 0;
+            themeSound.loop = false;
+            playSound(themeSound);
+            startMinigame();
+        }
+
+        function addStopRansomCopy() {
+            const ransomCopy = document.createElement("img");
+            ransomCopy.className = "stop-ransom-copy";
+            ransomCopy.src = "Ransomstop.webp";
+            ransomCopy.alt = "";
+            ransomCopy.style.left = Math.floor(Math.random() * Math.max(1, window.innerWidth - 180)) + "px";
+            ransomCopy.style.top = Math.floor(Math.random() * Math.max(1, window.innerHeight - 180)) + "px";
+            stopRansomCopies.appendChild(ransomCopy);
+        }
+
+        function showGlitches() {
+            glitchLayer.replaceChildren();
+            function addPopup() {
+                if (glitchLayer.children.length >= 12) {
+                    return;
+                }
+                const glitch = document.createElement("img");
+                glitch.className = "glitch-image";
+                glitch.src = glitchImages[Math.floor(Math.random() * glitchImages.length)];
+                glitch.alt = "";
+                glitch.style.left = Math.floor(Math.random() * 82) + "vw";
+                glitch.style.top = Math.floor(Math.random() * 78) + "vh";
+                glitch.style.width = Math.floor(12 + Math.random() * 35) + "vw";
+                glitch.style.height = Math.floor(8 + Math.random() * 30) + "vh";
+                glitch.style.animationDelay = Math.floor(Math.random() * 180) + "ms";
+                glitch.addEventListener("animationend", function(event) {
+                    if (event.animationName === "glitchPopup") {
+                        glitch.remove();
+                    }
+                });
+                glitchLayer.appendChild(glitch);
+            }
+
+            glitchLayer.classList.remove("hidden");
+            for (let index = 0; index < 5; index++) {
+                addPopup();
+            }
+            window.clearInterval(glitchPopupInterval);
+            glitchPopupInterval = window.setInterval(addPopup, 420);
+        }
+
+        function spawnGold() {
+            const pickup = document.createElement("button");
+            const isSpecial = Math.random() < specialPickupChance;
+            pickup.className = "goldPickup";
+            if (isSpecial) {
+                pickup.classList.add("isSpecial");
+            }
+            pickup.type = "button";
+            pickup.setAttribute("aria-label", isSpecial ? "Collect 500 gold" : "Collect 5 gold");
+            const icon = document.createElement("img");
+            icon.src = isSpecial ? "HoneyPotDoorsInventoryIcon.webp" : "Gold.webp";
+            icon.alt = "";
+            pickup.appendChild(icon);
+            pickup.style.left = Math.floor(Math.random() * Math.max(1, window.innerWidth - 56)) + "px";
+            pickup.style.top = Math.floor(Math.random() * Math.max(1, window.innerHeight - 56)) + "px";
+            pickup.addEventListener("click", function() {
+                pickup.remove();
+                collectedGold = Math.min(goldGoal, collectedGold + (isSpecial ? goldGoal : goldPickupValue));
+                goldCount.textContent = String(collectedGold);
+                if (collectedGold >= goldGoal) {
+                    completeMinigame();
+                    return;
+                }
+                spawnGold();
+            });
+            goldField.appendChild(pickup);
+        }
+
+        function startMinigame() {
+            document.body.classList.add("minigame-active");
+            showGlitches();
+            collectedGold = 0;
+            goldCount.textContent = "0";
+            goldCounter.classList.remove("hidden");
+            jumpscareTimer.classList.remove("hidden");
+            jumpscareSeconds.textContent = String(jumpscareDelay);
+            thankYouMessage.classList.add("hidden");
+            nextLevel.classList.add("hidden");
+            goldField.replaceChildren();
+            for (let index = 0; index < goldOnScreen; index++) {
+                spawnGold();
+            }
+            let secondsLeft = jumpscareDelay;
+            countdownInterval = window.setInterval(function() {
+                secondsLeft--;
+                jumpscareSeconds.textContent = String(secondsLeft);
+                if (secondsLeft <= 0) {
+                    window.clearInterval(countdownInterval);
+                    jumpscareTimer.classList.add("hidden");
+                    triggerFinalJumpscare();
+                }
+            }, 1000);
+        }
+
+        function completeMinigame() {
+            window.clearInterval(countdownInterval);
+            window.clearInterval(glitchPopupInterval);
+            jumpscareTimer.classList.add("hidden");
+            themeSound.pause();
+            playSound(payoffSound);
+            goldField.replaceChildren();
+            glitchLayer.classList.add("hidden");
+            goldCounter.classList.add("hidden");
+            thankYouMessage.classList.remove("hidden");
+            completionTimeout = window.setTimeout(function() {
+                thankYouMessage.classList.add("hidden");
+                nextLevel.classList.remove("hidden");
+            }, 1800);
+        }
+
+        async function triggerFinalJumpscare() {
+            window.clearInterval(glitchPopupInterval);
+            glitchLayer.classList.add("hidden");
+            goldField.replaceChildren();
+            goldCounter.classList.add("hidden");
+            themeSound.pause();
+            jumpscareRansom.classList.remove("hidden");
+            await playSoundUntilEnd(attackSound);
+            window.close();
+            if (!window.closed) {
+                window.location.replace("about:blank");
+            }
+        }
+
+        function startDownload() {
+            idleRansom.classList.add("hidden");
+            downloadPanel.classList.remove("hidden");
+            progressFill.style.width = "0";
+            downloadPercent.textContent = "0%";
+            progressTrack.setAttribute("aria-valuenow", "0");
+            let progress = 0;
+            let dotCount = 1;
+            setLoadingDots(dotCount);
+            stopRansomCopies.classList.remove("hidden");
+            stopRansomCopies.replaceChildren();
+            for (let index = 0; index < 5; index++) {
+                addStopRansomCopy();
+            }
+
+            dotInterval = window.setInterval(function() {
+                dotCount = dotCount === 3 ? 1 : dotCount + 1;
+                setLoadingDots(dotCount);
+            }, 250);
+
+            stopRansomInterval = window.setInterval(function() {
+                if (stopRansomCopies.children.length < 36) {
+                    addStopRansomCopy();
+                }
+            }, 100);
+
+            progressInterval = window.setInterval(function() {
+                progress = Math.min(100, progress + 5);
+                progressFill.style.width = progress + "%";
+                downloadPercent.textContent = progress + "%";
+                progressTrack.setAttribute("aria-valuenow", String(progress));
+                if (progress === 100) {
+                    window.clearInterval(progressInterval);
+                    window.clearInterval(dotInterval);
+                    window.clearInterval(stopRansomInterval);
+                    window.setTimeout(finishDownload, 150);
+                }
+            }, 55);
+        }
+
+        function showJumpscare() {
+            document.removeEventListener("mousemove", showJumpscare);
+            window.clearTimeout(scareTimeout);
+            idleRansom.classList.add("hidden");
+            jumpscareRansom.classList.remove("hidden");
+            window.setTimeout(function() {
+                jumpscareRansom.classList.add("hidden");
+                startDownload();
+            }, 650);
+        }
+
+        function spawnRansom() {
+            if (encounterActive) {
+                return;
+            }
+            encounterActive = true;
+            notificationSound.loop = false;
+            playSound(notificationSound);
+            document.body.classList.add("minigame-active");
+            startButton.classList.add("hidden");
+            idleRansom.classList.remove("hidden");
+            idleRansom.style.top = Math.floor(Math.random() * Math.max(1, window.innerHeight - 100)) + "px";
+            idleRansom.style.left = Math.floor(Math.random() * Math.max(1, window.innerWidth - 100)) + "px";
+
+            window.setTimeout(function() {
+                idleRansom.style.top = "50%";
+                idleRansom.style.left = "50%";
+                idleRansom.style.width = "min(25vw, 300px)";
+                document.addEventListener("mousemove", showJumpscare);
+                scareTimeout = window.setTimeout(showJumpscare, 1800);
+            }, 1000);
+        }
+
+        startButton.addEventListener("click", spawnRansom);
+    </script>
+</body>
+</html>
